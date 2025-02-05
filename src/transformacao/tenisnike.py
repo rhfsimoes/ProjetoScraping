@@ -4,7 +4,9 @@ import sqlite3
 import datetime
 
 # Definir o caminho para o JSONL
-df = pd.read_json('../data/datatnike.jsonl', lines=True) 
+df = pd.read_json('C:/Users/Rafael/documents/ProjetoScraping/data/tnike.jsonl', lines=True)
+
+
 
 # Adicionar a coluna _source com valor fixo
 df['_source'] = "https://lista.mercadolivre.com.br/tenis-nike-masculino"
@@ -19,7 +21,7 @@ df['old_price_centavos'] = df['old_price_centavos'].fillna(0).astype(float)
 df['new_price_reais'] = df['new_price_reais'].fillna(0).astype(float)
 df['new_price_centavos'] = df['new_price_centavos'].fillna(0).astype(float)
 df['reviews_rating_number'] = df['reviews_rating_number'].fillna(0).astype(float)
-#df['discount'] = df['discount'].str.replace(r"\D", "", regex=True).fillna(0).astype(float)
+df['discount'] = df['discount'].str.replace(r"\D", "", regex=True).fillna(0).astype(float)
 
 # Remover os parenteses do review_amount
 
@@ -37,7 +39,7 @@ df.drop(columns=['old_price_reais','old_price_centavos','new_price_reais','new_p
 
 # Conectar no banco de dados
 
-conn = sqlite3.connect('../data/tnikequotes.db')
+conn = sqlite3.connect('C:/Users/Rafael/documents/ProjetoScraping/data/tnikequotes.db')
 
 # Salvar o Banco de dados
 
