@@ -9,7 +9,7 @@ df = pd.read_json('C:/Users/Rafael/documents/ProjetoScraping/data/tnike.jsonl', 
 
 
 # Adicionar a coluna _source com valor fixo
-df['_source'] = "https://lista.mercadolivre.com.br/tenis-nike-masculino"
+df['_source'] = df['link'].fillna(0)
 
 # Adicionar a coluna _data_coleta com data e hora atuais
 df['_data_coleta'] = datetime.datetime.now()
@@ -22,6 +22,7 @@ df['new_price_reais'] = df['new_price_reais'].fillna(0).astype(float)
 df['new_price_centavos'] = df['new_price_centavos'].fillna(0).astype(float)
 df['reviews_rating_number'] = df['reviews_rating_number'].fillna(0).astype(float)
 df['discount'] = df['discount'].str.replace(r"\D", "", regex=True).fillna(0).astype(float)
+df['link'] = df['link'].fillna(0)
 
 # Remover os parenteses do review_amount
 

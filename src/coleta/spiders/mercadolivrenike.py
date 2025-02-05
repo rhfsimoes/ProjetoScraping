@@ -3,7 +3,8 @@ import scrapy
 
 class MercadolivreSpider(scrapy.Spider):
     name = "mercadolivrenike"
-    start_urls = ["https://lista.mercadolivre.com.br/tenis-nike-masculino"]
+    start_urls = ["https://lista.mercadolivre.com.br/tenis-nike-masculino"
+                  "https://lista.mercadolivre.com.br/tenis-addidas-masculino"]
     page_count = 1
     max_pages = 10
 
@@ -22,6 +23,7 @@ class MercadolivreSpider(scrapy.Spider):
                 'reviews_rating_number': product.css("span.poly-reviews__rating::text").get(),
                 'reviews_amount': product.css("span.poly-reviews__total::text").get(),
                 'discount': product.css("span.andes-money-amount__discount::text").get(),
+                'link': product.css('a.poly-component__title::attr(href)').get(),
             }
 
         if self.page_count <self.max_pages:
